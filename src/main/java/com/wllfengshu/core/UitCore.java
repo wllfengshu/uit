@@ -62,6 +62,7 @@ public class UitCore {
     private File giveWorkspace() {
         File nowPath = new File("./");
         File[] nowFiles = nowPath.listFiles();
+        assert nowFiles != null;
         for (File nowFile : nowFiles) {
             if (nowFile.getName().endsWith(Constant.WORKSPACE_XML)) {
                 return nowFile;
