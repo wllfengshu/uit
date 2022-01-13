@@ -13,7 +13,7 @@ public class Constant {
      * ui界面大小
      */
     public static final int UI_WIDTH = 600;
-    public static final int UI_HEIGHT = 400;
+    public static final int UI_HEIGHT = 200;
 
     /**
      * xml

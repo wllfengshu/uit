@@ -47,10 +47,10 @@ public class UitCore {
     public String updateNowFile() {
         // 1查找当前目录是否有workspace.xml文件
         File workspace = this.giveWorkspace();
-       if (null == workspace) {
-           return Constant.NOT_FOUND_FILE;
-       }
-       // 2updateAppointFile
+        if (null == workspace) {
+            return Constant.NOT_FOUND_FILE;
+        }
+        // 2updateAppointFile
         return this.updateAppointFile(workspace.getAbsolutePath());
     }
 
@@ -100,7 +100,7 @@ public class UitCore {
             }
             String fileNew = file.replace(Constant.PROPERTIES_COMPONENT_ORIGINAL, Constant.PROPERTIES_COMPONENT_NEW);
             Files.write(path, fileNew.getBytes(StandardCharsets.UTF_8));
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
@@ -123,7 +123,7 @@ public class UitCore {
                 return true;
             }
             Files.copy(workspace.toPath(), backFile.toPath());
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }

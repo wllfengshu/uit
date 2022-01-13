@@ -2,7 +2,7 @@ package com.wllfengshu.ui;
 
 import com.wllfengshu.common.Constant;
 import com.wllfengshu.core.UitCore;
-import org.apache.commons.lang3.StringUtils;
+import com.wllfengshu.util.StringUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -31,11 +31,11 @@ public class UitUi extends JFrame {
         Box box = Box.createVerticalBox();
         box.add(new JLabel("状态："));
         box.add(TIPS);
-        box.add(new JLabel("----------------------------"));
+        box.add(new JLabel("------------------------------------------------------------"));
         box.add(new JLabel("方法一：选择 项目/.idea/workspace.xml文件，然后点击下方“提交文件”按钮"));
         box.add(this.giveChoiceBut());
         box.add(this.giveSubmitBut());
-        box.add(new JLabel("方法二：把此文件放到 项目/.idea/目录下，然后点击下方“转换文件”按钮。"));
+        box.add(new JLabel("方法二：把此程序放到 项目/.idea/目录下打开，然后点击下方“转换文件”按钮"));
         box.add(this.giveTransformBut());
         this.add(box);
     }
