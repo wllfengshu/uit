@@ -3,7 +3,7 @@ package com.wllfengshu;
 import com.wllfengshu.ui.UitUi;
 
 /**
- * Runner
+ * 启动ui
  *
  * @author liangliang.wang
  * @version 1.0
