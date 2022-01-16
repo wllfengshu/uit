@@ -1,4 +1,4 @@
-package com.wllfengshu.util;
+package com.wllfengshu.app.util;
 
 /**
  * 字符串工具类
@@ -9,7 +9,7 @@ package com.wllfengshu.util;
 public class StringUtils {
 
     /**
-     * 是否为空
+     * 不是空
      *
      * @param val
      * @return
@@ -19,5 +19,15 @@ public class StringUtils {
             return false;
         }
         return true;
+    }
+
+    /**
+     * 是空
+     *
+     * @param val
+     * @return
+     */
+    public static boolean isEmpty(String val) {
+        return !isNotEmpty(val);
     }
 }
