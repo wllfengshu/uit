@@ -1,38 +1,38 @@
 <idea-plugin>
-    <id>app.wllfengshu.uit</id>
-    <name>update idea test</name>
-    <version>1.0</version>
-    <vendor email="wllfengshu@163.com" url="http://www.wllfengshu.com">tianDiXuanWu</vendor>
+  <id>app.com.wllfengshu.uit</id>
+  <name>update idea test</name>
+  <version>1.0</version>
+  <vendor email="com.wllfengshu@163.com" url="http://www.com.wllfengshu.com">tianDiXuanWu</vendor>
 
-    <description><![CDATA[
+  <description><![CDATA[
     如果包名过长，在跑单测时会报错。该插件就是解决该问题。他的原理是修改.idea/workspace.xml文件。
     ]]>
-    </description>
+  </description>
 
-    <change-notes><![CDATA[
+  <change-notes><![CDATA[
     第一次，进行初始化功能设计
     ]]>
-    </change-notes>
+  </change-notes>
 
-    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
-    <idea-version since-build="173.0"/>
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+  <idea-version since-build="173.0"/>
 
-    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
-         on how to target different products -->
-    <!-- uncomment to enable com.wllfengshu.plugin in all products
-    <depends>com.intellij.modules.lang</depends>
-    -->
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+       on how to target different products -->
+  <!-- uncomment to enable com.com.wllfengshu.plugin in all products
+  <depends>com.intellij.modules.lang</depends>
+  -->
 
-    <extensions defaultExtensionNs="com.intellij">
-        <!-- Add your extensions here -->
-    </extensions>
+  <extensions defaultExtensionNs="com.intellij">
+    <!-- Add your extensions here -->
+  </extensions>
 
-    <actions>
-        <!-- Add your actions here -->
-        <action id="UpdateIdeaTestId" class="com.wllfengshu.plugin.UitAnAction" text="解决包名过长单测报错2" description="解决包名过长导致单测报错问题">
-            <add-to-group group-id="ToolsMenu" anchor="first"/>
-            <keyboard-shortcut first-keystroke="ctrl T" keymap="$default"/>
-        </action>
-    </actions>
+  <actions>
+    <!-- Add your actions here -->
+    <action id="UpdateIdeaTestId" class="com.wllfengshu.plugin.UitAnAction" text="解决包名过长单测报错2" description="解决包名过长导致单测报错问题">
+      <add-to-group group-id="ToolsMenu" anchor="first"/>
+      <keyboard-shortcut first-keystroke="ctrl T" keymap="$default"/>
+    </action>
+  </actions>
 
 </idea-plugin>

@@ -1,7 +1,6 @@
 package com.wllfengshu.app.enumerate;
 
 import com.intellij.notification.NotificationType;
-import com.intellij.openapi.ui.MessageType;
 
 /**
  * 操作结果枚举
