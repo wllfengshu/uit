@@ -12,7 +12,7 @@ public enum ResultEnum {
 
     SUCCESS(NotificationType.INFORMATION, "Success"),
 
-    NOT_FOUNT_WORKSPACE(NotificationType.ERROR, "Not fount ./idea/workspace.xml"),
+    NOT_FOUNT_WORKSPACE(NotificationType.WARNING, "Not fount ./idea/workspace.xml"),
 
     BACKUPS_FILE_FAIL(NotificationType.ERROR, "Backups ./idea/workspace.xml fail"),
 

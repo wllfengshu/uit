@@ -1,8 +1,8 @@
 <idea-plugin>
   <id>app.com.wllfengshu.uit</id>
   <name>update idea test</name>
-  <version>1.0</version>
-  <vendor email="com.wllfengshu@163.com" url="http://www.com.wllfengshu.com">tianDiXuanWu</vendor>
+  <version>2.1</version>
+  <vendor email="com.wllfengshu@163.com" url="https://github.com/wllfengshu/">tianDiXuanWu</vendor>
 
   <description><![CDATA[
     如果包名过长，在跑单测时会报错。该插件就是解决该问题。他的原理是修改.idea/workspace.xml文件。
@@ -10,7 +10,9 @@
   </description>
 
   <change-notes><![CDATA[
-    第一次，进行初始化功能设计
+    v1 进行初始化功能设计
+    v2 增加idea插件支持
+    v2.1 支持扫描当前idea中所有的module
     ]]>
   </change-notes>
 
@@ -29,7 +31,7 @@
 
   <actions>
     <!-- Add your actions here -->
-    <action id="UpdateIdeaTestId" class="com.wllfengshu.plugin.UitAnAction" text="解决包名过长单测报错2" description="解决包名过长导致单测报错问题">
+    <action id="UpdateIdeaTestId" class="com.wllfengshu.plugin.button.UitAnAction" text="解决包名过长单测报错V2" description="解决包名过长导致单测报错问题">
       <add-to-group group-id="ToolsMenu" anchor="first"/>
       <keyboard-shortcut first-keystroke="ctrl T" keymap="$default"/>
     </action>

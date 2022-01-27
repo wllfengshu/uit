@@ -1,9 +1,9 @@
 package com.wllfengshu.app.core;
 
-import com.wllfengshu.app.common.Constant;
+import com.wllfengshu.app.common.AppConstant;
 import com.wllfengshu.app.enumerate.ResultEnum;
-import com.wllfengshu.app.util.LogUtils;
-import com.wllfengshu.app.util.StringUtils;
+import com.wllfengshu.common.LogUtils;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.nio.charset.StandardCharsets;
@@ -17,37 +17,38 @@ import java.nio.file.Path;
  * @version 1.0
  * @date 2022/1/15 14:31
  */
-public class UitCore {
+public class AppCore {
 
-    private static volatile UitCore uitCore = null;
-    private UitCore(){}
+    private static volatile AppCore appCore = null;
+    private AppCore(){}
 
-    public static UitCore instance() {
-        if (null == uitCore) {
-            synchronized (UitCore.class) {
-                if (null == uitCore) {
-                    uitCore = new UitCore();
+    public static AppCore instance() {
+        if (null == appCore) {
+            synchronized (AppCore.class) {
+                if (null == appCore) {
+                    appCore = new AppCore();
                 }
             }
         }
-        return uitCore;
+        return appCore;
     }
 
     /**
      * 解决单测报错问题
      *
-     * @param basePath 项目的根路径
+     * @param basePath 项目的根路径（不包含.idea这一层目录）
      * @return
      */
-    public ResultEnum core(String basePath) {
-        LogUtils.info("pending project:" + basePath);
-        // 1check
-        if (StringUtils.isEmpty(basePath)) {
+    public ResultEnum run(@NotNull String basePath) {
+        LogUtils.write("--start:project:" + basePath);
+        // 1init
+        final String ideaPath = basePath + AppConstant.IDEA_PATH;
+        final String workspacePath = ideaPath + AppConstant.WORKSPACE_XML;
+        final File workspaceFile = new File(workspacePath);
+        if (!workspaceFile.exists()) {
+            LogUtils.write("run: not found file " + workspacePath);
             return ResultEnum.NOT_FOUNT_WORKSPACE;
         }
-        final String ideaPath = basePath + Constant.IDEA_PATH;
-        final String workspacePath = ideaPath + Constant.WORKSPACE_XML;
-        final File workspaceFile = new File(workspacePath);
         // 2backups
         if (!this.backups(workspaceFile, ideaPath)) {
             return ResultEnum.BACKUPS_FILE_FAIL;
@@ -56,6 +57,7 @@ public class UitCore {
         if (!this.update(workspaceFile)) {
             return ResultEnum.UPDATE_FILE_FAIL;
         }
+        LogUtils.write("--end:project:" + basePath);
         return ResultEnum.SUCCESS;
     }
 
@@ -69,12 +71,12 @@ public class UitCore {
         try {
             Path path = workspaceFile.toPath();
             String file = Files.readString(path, StandardCharsets.UTF_8);
-            if (file.contains(Constant.DYNAMIC_CLASSPATH)) {
+            if (file.contains(AppConstant.DYNAMIC_CLASSPATH)) {
                 // 已经有了待添加的数据
-                LogUtils.info("update: already file " + file);
+                LogUtils.write("update: already file " + path.getFileName());
                 return true;
             }
-            String fileNew = file.replace(Constant.PROPERTIES_COMPONENT_ORIGINAL, Constant.PROPERTIES_COMPONENT_NEW);
+            String fileNew = file.replace(AppConstant.PROPERTIES_COMPONENT_ORIGINAL, AppConstant.PROPERTIES_COMPONENT_NEW);
             Files.writeString(path, fileNew, StandardCharsets.UTF_8);
         } catch (Exception e) {
             e.printStackTrace();
@@ -92,11 +94,11 @@ public class UitCore {
      */
     private boolean backups(File workspaceFile, String ideaPath) {
         try {
-            String backupFilePath = ideaPath + Constant.WORKSPACE_XML_BACK;
+            String backupFilePath = ideaPath + AppConstant.WORKSPACE_XML_BACK;
             File backFile = new File(backupFilePath);
             if (backFile.exists()) {
                 // 待备份文件已存在
-                LogUtils.info("backups: already file " + backupFilePath);
+                LogUtils.write("backups: already file " + backupFilePath);
                 return true;
             }
             Files.copy(workspaceFile.toPath(), backFile.toPath());

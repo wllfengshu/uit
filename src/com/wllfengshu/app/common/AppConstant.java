@@ -6,7 +6,7 @@ package com.wllfengshu.app.common;
  * @author liangliang.wang
  * @date 2022/1/15 15:18
  */
-public class Constant {
+public class AppConstant {
 
     /**
      * path
