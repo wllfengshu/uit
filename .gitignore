@@ -11,6 +11,8 @@
 
 ### IntelliJ IDEA ###
 .idea
+.gradle
+out
 *.iws
 *.iml
 *.ipr
