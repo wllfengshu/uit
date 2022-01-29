@@ -1,7 +1,7 @@
-package com.wllfengshu.app.common;
+package com.wllfengshu.uit.app.common;
 
 /**
- * 常量
+ * App constant
  *
  * @author liangliang.wang
  * @date 2022/1/15 15:18
@@ -20,7 +20,7 @@ public class AppConstant {
     public static final String WORKSPACE_XML_BACK = "workspace_back.xml";
 
     /**
-     * 主要替换的代码
+     * core code
      */
     public static final String PROPERTIES_COMPONENT_ORIGINAL = "<component name=\"PropertiesComponent\">";
     public static final String DYNAMIC_CLASSPATH = "<property name=\"dynamic.classpath\" value=\"true\" />";

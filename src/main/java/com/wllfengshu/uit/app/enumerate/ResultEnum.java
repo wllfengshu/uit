@@ -1,9 +1,9 @@
-package com.wllfengshu.app.enumerate;
+package com.wllfengshu.uit.app.enumerate;
 
 import com.intellij.notification.NotificationType;
 
 /**
- * 操作结果枚举
+ * Result enum
  *
  * @author liangliang.wang
  * @date 2022/1/15 15:18
@@ -12,20 +12,20 @@ public enum ResultEnum {
 
     SUCCESS(NotificationType.INFORMATION, "Success"),
 
-    NOT_FOUNT_WORKSPACE(NotificationType.WARNING, "Not fount ./idea/workspace.xml"),
+    NOT_FOUNT_WORKSPACE(NotificationType.WARNING, "Not fount: %s/idea/workspace.xml"),
 
-    BACKUPS_FILE_FAIL(NotificationType.ERROR, "Backups ./idea/workspace.xml fail"),
+    BACKUPS_FILE_FAIL(NotificationType.ERROR, "Backups fail: %s/idea/workspace.xml"),
 
-    UPDATE_FILE_FAIL(NotificationType.ERROR, "Update ./idea/workspace.xml fail");
+    UPDATE_FILE_FAIL(NotificationType.ERROR, "Update fail: %s/idea/workspace.xml");
 
     /**
-     * 级别
+     * leave
      */
-    private NotificationType leaver;
+    private final NotificationType leaver;
     /**
-     * 提示信息
+     * massage
      */
-    private String msg;
+    private final String msg;
 
     public NotificationType getLeaver() {
         return leaver;

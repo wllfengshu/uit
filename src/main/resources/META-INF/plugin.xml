@@ -1,0 +1,40 @@
+<idea-plugin>
+    <id>app.com.wllfengshu.uit</id>
+    <name>update idea test</name>
+    <version>2.1</version>
+    <vendor email="com.wllfengshu@163.com" url="https://github.com/wllfengshu/">TianDiXuanWu</vendor>
+
+    <description><![CDATA[
+        如果包名过长，在跑单测时会报错。该插件就是解决该问题。他的原理是修改.idea/workspace.xml文件。
+        ]]>
+    </description>
+
+    <change-notes><![CDATA[
+        v1 进行初始化功能设计
+        v2 增加idea插件支持
+        v2.1 支持扫描当前idea中所有的module
+        ]]>
+    </change-notes>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <notificationGroup id="Uit_Notification_Group" displayType="BALLOON"/>
+    </extensions>
+
+    <actions>
+        <action id="UpdateIdeaTestId" class="com.wllfengshu.uit.plugin.clickbutton.UitAnAction"
+                text="解决包名过长单测报错V2"
+                description="解决包名过长导致单测报错问题3">
+            <add-to-group group-id="ToolsMenu" anchor="first"/>
+            <keyboard-shortcut first-keystroke="ctrl T" keymap="$default"/>
+        </action>
+    </actions>
+
+    <projectListeners>
+        <listener class="com.wllfengshu.uit.plugin.importmodule.UitModuleListener"
+                  topic="com.intellij.openapi.project.ModuleListener"/>
+        <listener class="com.wllfengshu.uit.plugin.importproject.UitProjectListener"
+                  topic="com.intellij.openapi.project.ProjectManagerListener"/>
+    </projectListeners>
+</idea-plugin>

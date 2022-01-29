@@ -1,8 +1,8 @@
-package com.wllfengshu.app.core;
+package com.wllfengshu.uit.app.core;
 
-import com.wllfengshu.app.common.AppConstant;
-import com.wllfengshu.app.enumerate.ResultEnum;
-import com.wllfengshu.common.LogUtils;
+import com.intellij.openapi.diagnostic.Logger;
+import com.wllfengshu.uit.app.common.AppConstant;
+import com.wllfengshu.uit.app.enumerate.ResultEnum;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -11,7 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 /**
- * 核心逻辑
+ * App core
  *
  * @author liangliang.wang
  * @version 1.0
@@ -19,6 +19,7 @@ import java.nio.file.Path;
  */
 public class AppCore {
 
+    private static final Logger LOG = Logger.getInstance(AppCore.class);
     private static volatile AppCore appCore = null;
     private AppCore(){}
 
@@ -34,19 +35,19 @@ public class AppCore {
     }
 
     /**
-     * 解决单测报错问题
+     * run
      *
-     * @param basePath 项目的根路径（不包含.idea这一层目录）
+     * @param basePath Is project root path, but not include ".idea"
      * @return
      */
     public ResultEnum run(@NotNull String basePath) {
-        LogUtils.write("--start:project:" + basePath);
+        LOG.info("--start:project:" + basePath);
         // 1init
         final String ideaPath = basePath + AppConstant.IDEA_PATH;
         final String workspacePath = ideaPath + AppConstant.WORKSPACE_XML;
         final File workspaceFile = new File(workspacePath);
         if (!workspaceFile.exists()) {
-            LogUtils.write("run: not found file " + workspacePath);
+            LOG.warn("run: not found file " + workspacePath);
             return ResultEnum.NOT_FOUNT_WORKSPACE;
         }
         // 2backups
@@ -57,12 +58,12 @@ public class AppCore {
         if (!this.update(workspaceFile)) {
             return ResultEnum.UPDATE_FILE_FAIL;
         }
-        LogUtils.write("--end:project:" + basePath);
+        LOG.info("--end:project:" + basePath);
         return ResultEnum.SUCCESS;
     }
 
     /**
-     * 修改文件
+     * update file
      *
      * @param workspaceFile
      * @return
@@ -72,21 +73,20 @@ public class AppCore {
             Path path = workspaceFile.toPath();
             String file = Files.readString(path, StandardCharsets.UTF_8);
             if (file.contains(AppConstant.DYNAMIC_CLASSPATH)) {
-                // 已经有了待添加的数据
-                LogUtils.write("update: already file " + path.getFileName());
+                LOG.info("update: already file " + path.getFileName());
                 return true;
             }
             String fileNew = file.replace(AppConstant.PROPERTIES_COMPONENT_ORIGINAL, AppConstant.PROPERTIES_COMPONENT_NEW);
             Files.writeString(path, fileNew, StandardCharsets.UTF_8);
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error(e);
             return false;
         }
         return true;
     }
 
     /**
-     * 备份文件
+     * backups file
      *
      * @param workspaceFile
      * @param ideaPath
@@ -97,13 +97,12 @@ public class AppCore {
             String backupFilePath = ideaPath + AppConstant.WORKSPACE_XML_BACK;
             File backFile = new File(backupFilePath);
             if (backFile.exists()) {
-                // 待备份文件已存在
-                LogUtils.write("backups: already file " + backupFilePath);
+                LOG.info("backups: already file " + backupFilePath);
                 return true;
             }
             Files.copy(workspaceFile.toPath(), backFile.toPath());
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error(e);
             return false;
         }
         return true;
